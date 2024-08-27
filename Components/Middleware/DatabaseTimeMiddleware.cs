@@ -1,3 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data.Common;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+
+public class DatabaseTimeMiddleware
+{
+    private readonly RequestDelegate _next;
+
+    public DatabaseTimeMiddleware(RequestDelegate next)
+    {
+        _next = next;
+    }
+
 public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
 {
     string ipAddress = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
@@ -42,4 +59,4 @@ public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvi
     }
 
     await _next(context);
-}
+}}
