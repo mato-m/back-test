@@ -24,11 +24,14 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./myapp
 
+      - name: Zip the published application
+        run: Compress-Archive -Path ./myapp/* -DestinationPath myapp.zip
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ./myapp
+          path: myapp.zip
 
   deploy:
     runs-on: windows-latest
@@ -44,7 +47,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
+      - name: Unzip the artifact
+        run: Expand-Archive -Path myapp.zip -DestinationPath myapp
+
+      - name: List contents for debugging
+        run: dir myapp
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -52,11 +61,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D457A4881EF44CB6973FA200DAB0B607 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A6088AE57B764C7CAB552638D8012977 }}
 
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'matotest'
           slot-name: 'Production'
-          package: ./myapp
+          package: './myapp'
