@@ -1,0 +1,47 @@
+@page "/ships/{ShipId}"
+@attribute [StreamRendering]
+@inject HttpClient Http
+
+<PageTitle>Ship Detail</PageTitle>
+
+<h1>@ship?.ship_name</h1>
+
+@if (ship == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <img src="@ship.image" alt="@ship.ship_name" style="width: 300px; height: auto;" />
+        <p>ID: @ship.ship_id</p>
+        <p>Name: @ship.ship_name</p>
+        <p>Model: @ship.ship_model</p>
+        <p>Type: @ship.ship_type</p>
+        <p>Home Port: @ship.home_port</p>
+        <p><a href="@ship.url" target="_blank">More info</a></p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? ShipId { get; set; }
+
+    private Ship? ship;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ship = await Http.GetFromJsonAsync<Ship>($"https://api.spacexdata.com/v3/ships/{ShipId}");
+    }
+
+    public class Ship
+    {
+        public string ship_id { get; set; }
+        public string ship_name { get; set; }
+        public string ship_model { get; set; }
+        public string ship_type { get; set; }
+        public string home_port { get; set; }
+        public string url { get; set; }
+        public string image { get; set; }
+    }
+}

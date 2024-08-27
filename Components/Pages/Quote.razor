@@ -1,0 +1,39 @@
+﻿@page "/quotes"
+@inject YourDbContext _context
+@using Microsoft.EntityFrameworkCore
+
+<h1>Quote Page</h1>
+
+@if (quotes == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>English</th>
+                <th>Serbian</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var quote in quotes)
+            {
+                <tr>
+                    <td>@quote.CitatEn</td>
+                    <td>@quote.CitatSr</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Citat> quotes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        quotes = await _context.Citati.ToListAsync();
+    }
+}

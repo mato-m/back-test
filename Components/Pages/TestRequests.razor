@@ -1,0 +1,44 @@
+@page "/test/requests"
+@inject YourDbContext _context
+@using Microsoft.EntityFrameworkCore
+
+<h1>Unique IP Address Records</h1>
+
+@if (Records == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Request count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var record in Records)
+                {
+                    <tr>
+                        <td>@record.Key</td>
+                        <td>@record.Value</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    public Dictionary<string, int> Records { get; private set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var ipAddressRecords = await _context.IpAddressRecords.ToListAsync();
+        Records = ipAddressRecords
+            .GroupBy(i => i.IpAddress)
+            .ToDictionary(g => g.Key, g => g.Count());
+    }
+}

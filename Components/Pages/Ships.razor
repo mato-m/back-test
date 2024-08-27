@@ -1,0 +1,50 @@
+﻿@page "/ships"
+@attribute [StreamRendering]
+@inject HttpClient Http
+
+<PageTitle>Ships</PageTitle>
+
+<h1>Ships</h1>
+
+<p>This component demonstrates fetching data from an API.</p>
+
+@if (ships == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var ship in ships)
+{
+    <tr>
+        <td>@ship.ship_id</td>
+        <td><a href="/ships/@ship.ship_id">@ship.ship_name</a></td>
+        <td><img src="@ship.image" alt="@ship.ship_name" style="width: 100px; height: auto;" /></td>
+    </tr>
+}        </tbody>
+    </table>
+}
+
+@code {
+    private Ship[]? ships;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ships = await Http.GetFromJsonAsync<Ship[]>("https://api.spacexdata.com/v3/ships/");
+    }
+
+public class Ship
+{
+    public string? ship_id { get; set; }
+    public string? ship_name { get; set; }
+    public string? image { get; set; }
+}}
