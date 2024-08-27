@@ -70,3 +70,4 @@ C:\Users\Mato\Downloads\siks\siks\obj\Debug\net8.0\refint\siks.dll
 C:\Users\Mato\Downloads\siks\siks\obj\Debug\net8.0\siks.pdb
 C:\Users\Mato\Downloads\siks\siks\obj\Debug\net8.0\siks.genruntimeconfig.cache
 C:\Users\Mato\Downloads\siks\siks\obj\Debug\net8.0\ref\siks.dll
+C:\Users\Mato\Downloads\siks\siks\obj\Debug\net8.0\siks.sourcelink.json

@@ -1,0 +1,12 @@
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\siks.exe
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\appsettings.Development.json
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\appsettings.json
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\siks.dll
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\siks.deps.json
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\siks.runtimeconfig.json
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\siks.pdb
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\Microsoft.EntityFrameworkCore.dll
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\Npgsql.dll
+C:\Users\Mato\Downloads\siks\siks\bin\Release\net8.0\publish\Npgsql.EntityFrameworkCore.PostgreSQL.dll
