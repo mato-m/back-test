@@ -10,8 +10,8 @@ builder.Services.AddRazorComponents()
 builder.Services.AddHttpClient();
 
 // Replace YourDbContext with the name of your actual DbContext class
-// builder.Services.AddDbContext<YourDbContext>(options =>
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<YourDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -27,7 +27,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
-// app.UseMiddleware<DatabaseTimeMiddleware>();
+app.UseMiddleware<DatabaseTimeMiddleware>();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("siks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e23d42a9278e6ba7cb13cebc3915b8eccbeec3d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b5e08caf633c6c4bc69da6f0b0a3d80751d5d8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("siks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("siks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

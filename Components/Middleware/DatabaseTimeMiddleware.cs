@@ -41,7 +41,7 @@ public class DatabaseTimeMiddleware
 
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT NOW()";
+                command.CommandText = "SELECT SYSDATETIME()";
                 var currentTime = await command.ExecuteScalarAsync();
 
                 Console.WriteLine($"Database Time: {currentTime}, Request IP Address: {ipAddress}");
