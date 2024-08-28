@@ -1,27 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-
-public class DatabaseTimeMiddleware
-{
-    private readonly RequestDelegate _next;
-
-    public DatabaseTimeMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
 public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvider)
 {
-    string ipAddress = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+    string ipAddress = context.Request.Headers["X-Forwarded-For"].FirstOrDefault()?.Split(',').FirstOrDefault()?.Trim();
+
     if (string.IsNullOrEmpty(ipAddress))
     {
         ipAddress = context.Connection.RemoteIpAddress?.ToString();
     }
+
+    // Extract only the IP part if the address includes a port
+    ipAddress = ipAddress?.Split(':').FirstOrDefault();
 
     if (string.IsNullOrEmpty(ipAddress))
     {
@@ -48,9 +35,6 @@ public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvi
         bool isWhitelisted = await dbContext.WhitelistedIPs.AnyAsync(ip => ip.Address == ipAddress);
         if (!isWhitelisted)
         {
-            // context.Response.StatusCode = 403; // Forbidden
-            // await context.Response.WriteAsync("Access denied. Your IP address is not whitelisted.");
-            // return;
             System.Console.WriteLine("Access denied. Your IP address is not whitelisted.");
         }
 
@@ -60,4 +44,4 @@ public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvi
     }
 
     await _next(context);
-}}
+}
