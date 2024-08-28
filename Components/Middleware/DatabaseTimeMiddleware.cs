@@ -35,6 +35,9 @@ public async Task InvokeAsync(HttpContext context, IServiceProvider serviceProvi
         bool isWhitelisted = await dbContext.WhitelistedIPs.AnyAsync(ip => ip.Address == ipAddress);
         if (!isWhitelisted)
         {
+            // context.Response.StatusCode = 403; // Forbidden
+            // await context.Response.WriteAsync("Access denied. Your IP address is not whitelisted.");
+            // return;
             System.Console.WriteLine("Access denied. Your IP address is not whitelisted.");
         }
 
